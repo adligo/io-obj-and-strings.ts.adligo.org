@@ -1,21 +1,21 @@
 {
   "author": "Scott Morgan",
   "bin": {
-    "obj.mjs": "./dist/obj.mjs",
-    "strings.mjs": "./dist/strings.mjs"
+    "typeGuards.mjs": "./dist/typeGuards.mjs",
+    "typeGuards.mts": "./src/typeGuards.mts"
   },
   "description": "This project contains classes with static TypeGuards for the projects listed in the README.md",
   "devDependencies": {
     "typescript": "^5.0.4"
   },
   "lockfileVersion": 3,
-  "name": "@ts.adligo.org/io-obj-and-strings",
+  "name": "@ts.adligo.org/type-guards",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adligo/io-obj-and-strings.ts.adligo.org.git"
+    "url": "git+https://github.com/adligo/type-guards.ts.adligo.org.git"
   },
   "scripts": {
-    "tests": "echo see io-obj-and-strings_tests.ts.adligo.org",
+    "tests": "echo see type-guards_tests.ts.adligo.org",
     "build": "tsc && slink -p",
     "tsc": "tsc"
   },
