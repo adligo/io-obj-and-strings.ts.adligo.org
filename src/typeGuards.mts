@@ -15,7 +15,31 @@
  */
 
 import { I_String, I_Named }  from '@ts.adligo.org/i_strings/dist/i_strings.mjs';
-
+import { I_Classifiable, I_Equatable, I_Hashable }  from '@ts.adligo.org/i_obj/dist/i_obj.mjs';
+/**
+ * Obj is inspired by Java Object class, but the interfaces are extracted and
+ * testable with these static methods.
+ */
+export class Obj {
+  public static isClassifiable(o: any): boolean {
+    if ((o as I_Classifiable).getClass != undefined) {
+      return true;
+    }
+    return false;
+  }
+  public static isEquatable(o: any): boolean {
+    if ((o as I_Equatable).equals != undefined) {
+      return true;
+    }
+    return false;
+  };
+  public static isHashable(o: any): boolean {
+    if ((o as I_Hashable).hashCode != undefined) {
+      return true;
+    }
+    return false;
+  };
+}
 
 export class Strings {
     public static isString(o: any): boolean {
