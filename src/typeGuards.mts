@@ -14,13 +14,36 @@
  * limitations under the License.
  */
 
-import { I_String, I_Named }  from '@ts.adligo.org/i_strings/dist/i_strings.mjs';
-import { I_Classifiable, I_Equatable, I_Hashable }  from '@ts.adligo.org/i_obj/dist/i_obj.mjs';
+import { I_String, I_Named } from '@ts.adligo.org/i_strings/dist/i_strings.mjs';
+import { I_Classifiable, I_Equatable, I_Hashable } from '@ts.adligo.org/i_obj/dist/i_obj.mjs';
+
+
+export class Errors {
+  public static hasCause(error: any): boolean {
+    if ((error as Error).cause != undefined) {
+      return true;
+    }
+    return false;
+  }
+  public static hasName(error: any): boolean {
+    if ((error as Error).name != undefined) {
+      return true;
+    }
+    return false;
+  }
+  public static hasMessage(error: any): boolean {
+    if ((error as Error).message != undefined) {
+      return true;
+    }
+    return false;
+  }
+}
+
 /**
  * Obj is inspired by Java Object class, but the interfaces are extracted and
  * testable with these static methods.
  */
-export class Obj {
+export class Objs {
   public static isClassifiable(o: any): boolean {
     if ((o as I_Classifiable).getClass != undefined) {
       return true;
@@ -42,16 +65,22 @@ export class Obj {
 }
 
 export class Strings {
-    public static isString(o: any): boolean {
-        if ((o as I_String).toString != undefined) {
-            return true;
-        }
-        return false;
+  /**
+   * it's isI_String vs isString since this is a slightly different thing
+   * an anomaly from the other type guards.
+   */
+  public static isI_String(o: any): boolean {
+    if ((o as I_String).toString != undefined) {
+      return true;
     }
-    public static isNamed(o: any): boolean {
-        if ((o as I_Named).getName != undefined) {
-            return true;
-        }
-        return false;
-    };
+    return false;
+  }
+  public static isNamed(o: any): boolean {
+    if ((o as I_Named).getName != undefined) {
+      return true;
+    }
+    return false;
+  };
 }
+
+
