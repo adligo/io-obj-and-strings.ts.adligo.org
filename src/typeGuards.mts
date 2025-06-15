@@ -108,13 +108,13 @@ export class Sets {
   public static isSet(o: any): boolean {
     if (o == undefined || o == null || (typeof o == 'number')) {
       return false;
-    } else if ((o as Set).union != undefined) {
+    } else if ((o as Set<any>).union != undefined) {
       return false;
-    } else if ((o as Set).intersection != undefined) {
+    } else if ((o as Set<any>).intersection != undefined) {
       return false;
-    } else if ((o as Set).difference != undefined)) {
+    } else if ((o as Set<any>).difference != undefined) {
       return false;
-    } else if ((o as Set).symmetricDifference != undefined) {
+    } else if ((o as Set<any>).symmetricDifference != undefined) {
       return false;
     }
     return true;
