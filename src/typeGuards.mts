@@ -20,48 +20,105 @@ import { I_Classifiable, I_Equatable, I_Hashable } from '@ts.adligo.org/i_obj/di
 
 export class Errors {
   public static hasCause(error: any): boolean {
-    if ((error as Error).cause != undefined) {
+    if (error == undefined || error == null || (typeof error == 'number')) {
+      return false;
+    } else if ((error as Error).cause != undefined) {
       return true;
     }
     return false;
   }
   public static hasName(error: any): boolean {
-    if ((error as Error).name != undefined) {
+    if (error == undefined || error == null || (typeof error == 'number')) {
+      return false;
+    } else if ((error as Error).name != undefined) {
       return true;
     }
     return false;
   }
   public static hasMessage(error: any): boolean {
-    if ((error as Error).message != undefined) {
+    if (error == undefined || error == null || (typeof error == 'number')) {
+      return false;
+    } else if ((error as Error).message != undefined) {
       return true;
     }
     return false;
   }
 }
 
+export class Maps {
+  public static isMap(o: any): boolean {
+    if (o == undefined || o == null || (typeof o == 'number')) {
+      return false;
+    } else if ((o as Map<any, any>).set == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).get == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).has == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).delete == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).clear == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).size == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).forEach == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).keys == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).values == undefined) {
+      return false;
+    } else if ((o as Map<any, any>).entries == undefined) {
+      return false;
+    }
+    return true;
+  }
+}
 /**
  * Obj is inspired by Java Object class, but the interfaces are extracted and
  * testable with these static methods.
  */
 export class Objs {
   public static isClassifiable(o: any): boolean {
-    if ((o as I_Classifiable).getClass != undefined) {
+    if (o == undefined || o == null || (typeof o == 'number')) {
+      return false;
+    } else if ((o as I_Classifiable).getClass != undefined) {
       return true;
     }
     return false;
   }
   public static isEquatable(o: any): boolean {
-    if ((o as I_Equatable).equals != undefined) {
+    if (o == undefined || o == null || (typeof o == 'number')) {
+      return false;
+    } else if ((o as I_Equatable).equals != undefined) {
       return true;
     }
     return false;
   };
   public static isHashable(o: any): boolean {
-    if ((o as I_Hashable).hashCode != undefined) {
+    if (o == undefined || o == null || (typeof o == 'number')) {
+      return false;
+    } else if ((o as I_Hashable).hashCode != undefined) {
       return true;
     }
     return false;
   };
+}
+
+export class Sets {
+  public static isSet(o: any): boolean {
+    if (o == undefined || o == null || (typeof o == 'number')) {
+      return false;
+    } else if ((o as Set).union != undefined) {
+      return false;
+    } else if ((o as Set).intersection != undefined) {
+      return false;
+    } else if ((o as Set).difference != undefined)) {
+      return false;
+    } else if ((o as Set).symmetricDifference != undefined) {
+      return false;
+    }
+    return true;
+  }
 }
 
 export class Strings {
@@ -70,18 +127,24 @@ export class Strings {
    * an anomaly from the other type guards.
    */
   public static isI_String(o: any): boolean {
-    if ((o as I_String).hasToStringOverride != undefined) {
-      if ((o as I_String).toString != undefined) {
-        return true;
+    if (o == undefined || o == null || (typeof o == 'number')) {
+      return false;
+    } else
+      if ((o as I_String).hasToStringOverride != undefined) {
+        if ((o as I_String).toString != undefined) {
+          return true;
+        }
       }
-    }
     return false;
   }
-  
+
   public static isNamed(o: any): boolean {
-    if ((o as I_Named).getName != undefined) {
-      return true;
-    }
+    if (o == undefined || o == null || (typeof o == 'number')) {
+      return false;
+    } else
+      if ((o as I_Named).getName != undefined) {
+        return true;
+      }
     return false;
   };
 }
