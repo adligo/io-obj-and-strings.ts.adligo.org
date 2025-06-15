@@ -70,11 +70,14 @@ export class Strings {
    * an anomaly from the other type guards.
    */
   public static isI_String(o: any): boolean {
-    if ((o as I_String).toString != undefined) {
-      return true;
+    if ((o as I_String).hasToStringOverride != undefined) {
+      if ((o as I_String).toString != undefined) {
+        return true;
+      }
     }
     return false;
   }
+  
   public static isNamed(o: any): boolean {
     if ((o as I_Named).getName != undefined) {
       return true;
