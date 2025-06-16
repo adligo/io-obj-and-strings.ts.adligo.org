@@ -105,18 +105,41 @@ export class Objs {
 }
 
 export class Sets {
+  public static difference(a: Set<any>, b: Set<any>): Set<any> {
+    let r = new Set();
+    for (const [val] of a) {
+      if (!b.has(val)) {
+        r.add(val);
+      }
+    }
+    return r;
+  }
+  
   public static isSet(o: any): boolean {
     if (o == undefined || o == null || (typeof o == 'number')) {
       return false;
-    } else if ((o as Set<any>).union != undefined) {
+    } else if ((o as Set<any>).clear != undefined) {
       return false;
-    } else if ((o as Set<any>).intersection != undefined) {
+    } else if ((o as Set<any>).delete != undefined) {
       return false;
-    } else if ((o as Set<any>).difference != undefined) {
+    } else if ((o as Set<any>).entries != undefined) {
       return false;
-    } else if ((o as Set<any>).symmetricDifference != undefined) {
+    } else if ((o as Set<any>).has != undefined) {
+      return false;
+    } else if ((o as Set<any>).size != undefined) {
       return false;
     }
+
+    /*
+    } else if ((o as Set<any>).union != undefined) {
+    return false;
+    } else if ((o as Set<any>).intersection != undefined) {
+    return false;
+    } else if ((o as Set<any>).difference != undefined) {
+    return false;
+    } else if ((o as Set<any>).symmetricDifference != undefined) {
+    return false;
+    } */
     return true;
   }
 }
