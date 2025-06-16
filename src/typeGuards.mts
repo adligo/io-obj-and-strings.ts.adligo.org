@@ -104,16 +104,11 @@ export class Objs {
   };
 }
 
+/**
+ * Don't use sets until node will allow them on the CLI
+ */
 export class Sets {
-  public static difference(a: Set<any>, b: Set<any>): Set<any> {
-    let r = new Set();
-    for (const [val] of a) {
-      if (!b.has(val)) {
-        r.add(val);
-      }
-    }
-    return r;
-  }
+
   
   public static isSet(o: any): boolean {
     if (o == undefined || o == null || (typeof o == 'number')) {
