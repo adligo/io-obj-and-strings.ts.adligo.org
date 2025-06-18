@@ -43,6 +43,14 @@ export class Errors {
     }
     return false;
   }
+  public static hasStack(error: any): boolean {
+    if (error == undefined || error == null || (typeof error == 'number')) {
+      return false;
+    } else if ((error as Error).stack != undefined) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export class Maps {
