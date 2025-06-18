@@ -20,37 +20,59 @@ import { I_Classifiable, I_Equatable, I_Hashable } from '@ts.adligo.org/i_obj/di
 
 export class Errors {
   public static hasCause(error: any): boolean {
-    if (error == undefined || error == null || (typeof error == 'number')) {
+    if (isNull(error) || (typeof error == 'number')) {
       return false;
-    } else if ((error as Error).cause != undefined) {
-      return true;
+    } else if (isNull((error as Error).cause)) {
+      return false;
     }
-    return false;
+    return true;
   }
   public static hasName(error: any): boolean {
-    if (error == undefined || error == null || (typeof error == 'number')) {
+    if (isNull(error) || (typeof error == 'number')) {
       return false;
-    } else if ((error as Error).name != undefined) {
-      return true;
+    } else if (isNull((error as Error).name)) {
+      return false;
     }
-    return false;
+    return true;
   }
   public static hasMessage(error: any): boolean {
-    if (error == undefined || error == null || (typeof error == 'number')) {
+    if (isNull(error) || (typeof error == 'number')) {
       return false;
-    } else if ((error as Error).message != undefined) {
-      return true;
+    } else if (isNull((error as Error).message )) {
+      return false;
     }
-    return false;
+    return true;
   }
   public static hasStack(error: any): boolean {
-    if (error == undefined || error == null || (typeof error == 'number')) {
+    if (isNull(error) || (typeof error == 'number')) {
       return false;
-    } else if ((error as Error).stack != undefined) {
+    } else if (isNull((error as Error).stack)) {
+      return false;
+    }
+    return true;
+  }
+  
+  /** 
+   * includes a check for the name only,
+   * this is a rather weak way to do this so go field by field
+   */
+  public static isError(error: any): boolean {
+    if (Errors.hasName(error)) {
       return true;
     }
     return false;
   }
+}
+
+/**
+ * returns true if o is null or undefined
+ * @param o
+ */
+export function isNull(o: any): boolean {
+    if (o == null || o == undefined) {
+        return true;
+    }
+    return false;
 }
 
 export class Maps {
