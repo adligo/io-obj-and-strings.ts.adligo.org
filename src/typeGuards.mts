@@ -20,33 +20,33 @@ import { I_Classifiable, I_Equatable, I_Hashable } from '@ts.adligo.org/i_obj/di
 
 export class Errors {
   public static hasCause(error: any): boolean {
-    if (isNull(error) || (typeof error == 'number')) {
+    if (isNil(error)) {
       return false;
-    } else if (isNull((error as Error).cause)) {
+    } else if (isNil((error as Error).cause)) {
       return false;
     }
     return true;
   }
   public static hasName(error: any): boolean {
-    if (isNull(error) || (typeof error == 'number')) {
+    if (isNil(error)) {
       return false;
-    } else if (isNull((error as Error).name)) {
+    } else if (isNil((error as Error).name)) {
       return false;
     }
     return true;
   }
   public static hasMessage(error: any): boolean {
-    if (isNull(error) || (typeof error == 'number')) {
+    if (isNil(error)) {
       return false;
-    } else if (isNull((error as Error).message )) {
+    } else if (isNil((error as Error).message )) {
       return false;
     }
     return true;
   }
   public static hasStack(error: any): boolean {
-    if (isNull(error) || (typeof error == 'number')) {
+    if (isNil(error)) {
       return false;
-    } else if (isNull((error as Error).stack)) {
+    } else if (isNil((error as Error).stack)) {
       return false;
     }
     return true;
@@ -56,8 +56,11 @@ export class Errors {
    * includes a check for the name only,
    * this is a rather weak way to do this so go field by field
    */
-  public static isError(error: any): boolean {
-    if (Errors.hasName(error)) {
+  public static isAError(error: any): boolean {
+    if (isNil(error)) {
+      return false;
+    }
+    if (error instanceof Error) {
       return true;
     }
     return false;
@@ -65,6 +68,9 @@ export class Errors {
 }
 
 /**
+ * @deprecated use isNil, it does the same thing but it has a slightly clearer name
+ * since this could be confused with just a null (and not a undefined) check.
+ *
  * returns true if o is null or undefined
  * @param o
  */
@@ -75,29 +81,40 @@ export function isNull(o: any): boolean {
     return false;
 }
 
+/**
+ * returns true if o is null or undefined
+ * @param o
+ */
+export function isNil(o: any): boolean {
+  if (o == null || o == undefined) {
+    return true;
+  }
+  return false;
+}
+
 export class Maps {
   public static isMap(o: any): boolean {
     if (o == undefined || o == null || (typeof o == 'number')) {
       return false;
-    } else if ((o as Map<any, any>).set == undefined) {
+    } else if (isNil((o as Map<any, any>).set)) {
       return false;
-    } else if ((o as Map<any, any>).get == undefined) {
+    } else if (isNil((o as Map<any, any>).get)) {
       return false;
-    } else if ((o as Map<any, any>).has == undefined) {
+    } else if (isNil((o as Map<any, any>).has)) {
       return false;
-    } else if ((o as Map<any, any>).delete == undefined) {
+    } else if (isNil((o as Map<any, any>).delete)) {
       return false;
-    } else if ((o as Map<any, any>).clear == undefined) {
+    } else if (isNil((o as Map<any, any>).clear)) {
       return false;
-    } else if ((o as Map<any, any>).size == undefined) {
+    } else if (isNil((o as Map<any, any>).size)) {
       return false;
-    } else if ((o as Map<any, any>).forEach == undefined) {
+    } else if (isNil((o as Map<any, any>).forEach)) {
       return false;
-    } else if ((o as Map<any, any>).keys == undefined) {
+    } else if (isNil((o as Map<any, any>).keys)) {
       return false;
-    } else if ((o as Map<any, any>).values == undefined) {
+    } else if (isNil((o as Map<any, any>).values)) {
       return false;
-    } else if ((o as Map<any, any>).entries == undefined) {
+    } else if (isNil((o as Map<any, any>).entries)) {
       return false;
     }
     return true;
@@ -109,28 +126,28 @@ export class Maps {
  */
 export class Objs {
   public static isClassifiable(o: any): boolean {
-    if (o == undefined || o == null || (typeof o == 'number')) {
+    if (isNil(o) || (typeof o == 'number')) {
       return false;
-    } else if ((o as I_Classifiable).getClass != undefined) {
-      return true;
+    } else if (isNil((o as I_Classifiable).getClass)) {
+      return false;
     }
-    return false;
+    return true;
   }
   public static isEquatable(o: any): boolean {
-    if (o == undefined || o == null || (typeof o == 'number')) {
+    if (isNil(o) || (typeof o == 'number')) {
       return false;
-    } else if ((o as I_Equatable).equals != undefined) {
-      return true;
+    } else if (isNil((o as I_Equatable).equals)) {
+      return false;
     }
-    return false;
+    return true;
   };
   public static isHashable(o: any): boolean {
-    if (o == undefined || o == null || (typeof o == 'number')) {
+    if (isNil(o) || (typeof o == 'number')) {
       return false;
-    } else if ((o as I_Hashable).hashCode != undefined) {
-      return true;
+    } else if (isNil((o as I_Hashable).hashCode )) {
+      return false;
     }
-    return false;
+    return true;
   };
 }
 
@@ -175,25 +192,23 @@ export class Strings {
    * an anomaly from the other type guards.
    */
   public static isI_String(o: any): boolean {
-    if (o == undefined || o == null || (typeof o == 'number')) {
+    if (isNil(o) || (typeof o == 'number')) {
       return false;
-    } else
-      if ((o as I_String).hasToStringOverride != undefined) {
-        if ((o as I_String).toString != undefined) {
-          return true;
-        }
-      }
-    return false;
+    } else if (isNil((o as I_String).hasToStringOverride)) {
+      return false;
+    } else if (isNil((o as I_String).toString)) {
+      return false;
+    }
+    return true;
   }
 
   public static isNamed(o: any): boolean {
-    if (o == undefined || o == null || (typeof o == 'number')) {
+    if (isNil(o) || (typeof o == 'number')) {
       return false;
-    } else
-      if ((o as I_Named).getName != undefined) {
-        return true;
-      }
-    return false;
+    } else if (isNil((o as I_Named).getName)) {
+      return false;
+    }
+    return true;
   };
 }
 
