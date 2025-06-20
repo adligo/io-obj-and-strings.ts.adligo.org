@@ -126,29 +126,42 @@ export class Maps {
  */
 export class Objs {
   public static isClassifiable(o: any): boolean {
-    if (isNil(o) || (typeof o == 'number')) {
+    if (isNil(o)) {
       return false;
-    } else if (isNil((o as I_Classifiable).getClass)) {
-      return false;
+    } else if (typeof o === 'object') {
+      if (isNil((o as I_Classifiable).getClass)) {
+        return false;
+      }
+      return true;
     }
-    return true;
+    return false;
   }
+  /** 
+   * This should work fine on regular old objects that have a equals method
+   * in addition to typescript classes that implement I_Equatable
+   */
   public static isEquatable(o: any): boolean {
-    if (isNil(o) || (typeof o == 'number')) {
+    if (isNil(o)) {
       return false;
-    } else if (isNil((o as I_Equatable).equals)) {
-      return false;
+    } else if (typeof o === 'object') {
+      if (isNil((o as I_Equatable).equals)) {
+        return false;
+      }
+      return true;
     }
-    return true;
-  };
+    return false;
+  }
   public static isHashable(o: any): boolean {
-    if (isNil(o) || (typeof o == 'number')) {
+    if (isNil(o)) {
       return false;
-    } else if (isNil((o as I_Hashable).hashCode )) {
-      return false;
+    } else if (typeof o === 'object') {
+      if (isNil((o as I_Hashable).hashCode )) {
+        return false;
+      }
+      return true;
     }
-    return true;
-  };
+    return false;
+  }
 }
 
 /**
