@@ -170,7 +170,7 @@ export class Objs {
 export class Sets {
 
   
-  public static isSet(o: any): boolean {
+  public static isASet(o: any): boolean {
     if (o == undefined || o == null || (typeof o == 'number')) {
       return false;
     } else if ((o as Set<any>).clear != undefined) {
@@ -183,9 +183,6 @@ export class Sets {
       return false;
     } else if ((o as Set<any>).size != undefined) {
       return false;
-    }
-
-    /*
     } else if ((o as Set<any>).union != undefined) {
     return false;
     } else if ((o as Set<any>).intersection != undefined) {
@@ -194,8 +191,20 @@ export class Sets {
     return false;
     } else if ((o as Set<any>).symmetricDifference != undefined) {
     return false;
-    } */
+    } 
     return true;
+  }
+  
+  /**
+   * @deprecated
+   * This is here for backwards compatibility
+   * Note if your wondering why we have isASet,
+   * it's because the auto importer in WebStorm will
+   * use the node class and metho with this isSet name by default
+   * causing issues.
+    */
+  public static isSet(o: any): boolean {
+    return Sets.isASet(o);
   }
 }
 
