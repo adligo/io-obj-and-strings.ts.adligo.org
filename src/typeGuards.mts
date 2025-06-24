@@ -38,7 +38,7 @@ export class Errors {
   public static hasMessage(error: any): boolean {
     if (isNil(error)) {
       return false;
-    } else if (isNil((error as Error).message )) {
+    } else if (isNil((error as Error).message)) {
       return false;
     }
     return true;
@@ -51,7 +51,7 @@ export class Errors {
     }
     return true;
   }
-  
+
   /** 
    * includes a check for the name only,
    * this is a rather weak way to do this so go field by field
@@ -75,10 +75,10 @@ export class Errors {
  * @param o
  */
 export function isNull(o: any): boolean {
-    if (o == null || o == undefined) {
-        return true;
-    }
-    return false;
+  if (o == null || o == undefined) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -155,7 +155,7 @@ export class Objs {
     if (isNil(o)) {
       return false;
     } else if (typeof o === 'object') {
-      if (isNil((o as I_Hashable).hashCode )) {
+      if (isNil((o as I_Hashable).hashCode)) {
         return false;
       }
       return true;
@@ -169,32 +169,32 @@ export class Objs {
  */
 export class Sets {
 
-  
+
   public static isASet(o: any): boolean {
     if (o == undefined || o == null || (typeof o == 'number')) {
       return false;
-    } else if ((o as Set<any>).clear != undefined) {
+    } else if ((o as any).clear == undefined) {
       return false;
-    } else if ((o as Set<any>).delete != undefined) {
+    } else if ((o as any).delete == undefined) {
       return false;
-    } else if ((o as Set<any>).entries != undefined) {
+    } else if ((o as any).entries == undefined) {
       return false;
-    } else if ((o as Set<any>).has != undefined) {
+    } else if ((o as any).has == undefined) {
       return false;
-    } else if ((o as Set<any>).size != undefined) {
+    } else if ((o as any).size == undefined) {
       return false;
-    } else if ((o as Set<any>).union != undefined) {
-    return false;
-    } else if ((o as Set<any>).intersection != undefined) {
-    return false;
-    } else if ((o as Set<any>).difference != undefined) {
-    return false;
-    } else if ((o as Set<any>).symmetricDifference != undefined) {
-    return false;
-    } 
+    } else if ((o as any).union == undefined) {
+      return false;
+    } else if ((o as any).intersection == undefined) {
+      return false;
+    } else if ((o as any).difference == undefined) {
+      return false;
+    } else if ((o as any).symmetricDifference == undefined) {
+      return false;
+    }
     return true;
   }
-  
+
   /**
    * @deprecated
    * This is here for backwards compatibility
